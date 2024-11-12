@@ -1,6 +1,10 @@
 name: 'simplic-oxs-auth-action'
 description: 'Authenticates with a Web API and retrieves a bearer token'
 
+branding:
+  icon: log-in
+  color: 'blue'
+
 inputs:
   email:
     description: 'Email for the API authentication'
