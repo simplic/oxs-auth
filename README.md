@@ -1,5 +1,5 @@
 # Simplic oxs authentication
 
-This acctions allows to get a bearer-token to access simplic-oxs api.
+This action allows to get a bearer-token to access simplic-oxs api.
 
-Desc
+The actions need as input a email, a password and the URL to access simplic-oxs.
