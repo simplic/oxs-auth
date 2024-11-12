@@ -1,1 +1,42 @@
+name: 'simplic-oxs-auth-action'
+description: 'Authenticates with a Web API and retrieves a bearer token'
 
+inputs:
+  email:
+    description: 'Email for the API authentication'
+    required: true
+  password:
+    description: 'Password for the API authentication'
+    required: true
+  auth-url:
+    description: 'The authentication URL for the API'
+    required: true
+
+outputs:
+  bearer-token:
+    description: 'The retrieved bearer token'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Install jq
+      run: sudo apt-get install -y jq
+
+    - name: Get Bearer Token
+      shell: bash
+      env:
+        AUTH_URL: ${{ inputs.auth-url }}
+        EMAIL: ${{ inputs.email }}
+        PASSWORD: ${{ inputs.password }}
+      run: |
+        # Send the authentication request
+        response=$(curl -s -X POST "$AUTH_URL/login" \
+          -H 'accept: application/json' \
+          -H "Content-Type: application/json" \
+          -d "{\"email\": \"$EMAIL\", \"password\": \"$PASSWORD\"}")
+
+        # Parse the JSON response to extract the token
+        token=$(echo "$response" | jq -r .token)
+
+        # Set the bearer token as an output
+        echo "bearer-token=$token" >> $GITHUB_ENV
