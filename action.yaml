@@ -25,7 +25,6 @@ runs:
   steps:
     - name: Install jq
       run: sudo apt-get install -y jq
-      shell: bash
 
     - name: Get Bearer Token
       env:
@@ -44,4 +43,3 @@ runs:
 
         # Set the bearer token as an output
         echo "bearer-token=$token" >> $GITHUB_ENV
-      shell: bash
