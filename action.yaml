@@ -44,4 +44,4 @@ runs:
         token=$(echo "$response" | jq -r .token)
 
         # Set the bearer token as an output
-        echo "bearer-token=$token" >> $GITHUB_ENV
+        echo "bearer-token=$token" >> "$GITHUB_OUTPUT"
